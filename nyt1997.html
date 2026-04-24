@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Один мозг, две системы — New York Times, 1997</title>
+  <meta name="description" content="Научная статья New York Times: когда взрослый добавляет язык — как мозг хранит второй язык. Исследование журнала Nature, 1997.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1a1008;
+      --gold: #c9963a;
+      --gold-light: #e8b95a;
+      --crimson: #c8294a;
+      --cream: #f5ede0;
+      --cream-dim: rgba(245,237,224,0.6);
+      --cream-faint: rgba(245,237,224,0.05);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(26,16,8,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,150,58,0.12);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 700; color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-logo em { color: var(--crimson); font-style: italic; }
+    .nav-cta {
+      background: var(--crimson); color: var(--cream);
+      text-decoration: none; padding: 8px 20px;
+      border-radius: 6px; font-size: 13px; font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 24px 72px;
+      text-align: center;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid rgba(201,150,58,0.12);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,150,58,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 720px; margin: 0 auto; position: relative; }
+    .hero-source {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(201,150,58,0.08);
+      border: 1px solid rgba(201,150,58,0.2);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: 12px; color: var(--gold);
+      font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--cream); margin-bottom: 16px;
+    }
+    .hero-h1 em { color: var(--gold-light); font-style: italic; }
+    .hero-byline {
+      font-size: 14px; color: rgba(245,237,224,0.4);
+      margin-bottom: 32px; line-height: 1.6;
+    }
+    .hero-byline strong { color: rgba(245,237,224,0.65); }
+    .hero-key {
+      display: inline-block;
+      background: rgba(200,41,74,0.1);
+      border: 1px solid rgba(200,41,74,0.25);
+      border-radius: 10px; padding: 16px 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic;
+      color: var(--gold-light); line-height: 1.6;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin: 40px 0 0;
+    }
+    .lang-btn {
+      padding: 8px 20px; border-radius: 6px;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+      border: 1px solid rgba(201,150,58,0.3);
+      background: transparent; color: rgba(245,237,224,0.4);
+      font-family: 'Nunito', sans-serif;
+    }
+    .lang-btn.active {
+      background: rgba(201,150,58,0.15);
+      color: var(--gold-light);
+      border-color: rgba(201,150,58,0.5);
+    }
+    .lang-btn:hover:not(.active) {
+      color: rgba(245,237,224,0.7);
+    }
+
+    /* ── ARTICLE ── */
+    .article-wrap {
+      max-width: 720px; margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    .article-en, .article-ru { display: none; }
+    .article-en.visible, .article-ru.visible { display: block; }
+
+    .article-p {
+      font-size: 16px; color: var(--cream-dim);
+      line-height: 1.95; margin-bottom: 20px;
+    }
+    .article-p:last-child { margin-bottom: 0; }
+    .article-p strong { color: var(--cream); }
+
+    .article-pull {
+      border-left: 4px solid var(--gold);
+      background: rgba(201,150,58,0.06);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 28px; margin: 32px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-style: italic;
+      color: var(--gold-light); line-height: 1.7;
+    }
+
+    /* ── SCIENCE CALLOUT ── */
+    .science-box {
+      background: var(--cream-faint);
+      border: 1px solid rgba(245,237,224,0.08);
+      border-top: 3px solid var(--gold);
+      border-radius: 12px; padding: 28px;
+      margin: 36px 0;
+    }
+    .science-box-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .science-box p {
+      font-size: 15px; color: var(--cream-dim);
+      line-height: 1.8; margin-bottom: 10px;
+    }
+    .science-box p:last-child { margin-bottom: 0; }
+    .science-box p strong { color: var(--cream); }
+
+    /* ── DIVIDER ── */
+    .article-divider {
+      display: flex; align-items: center;
+      gap: 16px; margin: 36px 0;
+    }
+    .article-divider::before, .article-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(245,237,224,0.08);
+    }
+    .article-divider span {
+      font-size: 18px; color: rgba(201,150,58,0.4);
+    }
+
+    /* ── RELEVANCE BOX ── */
+    .relevance {
+      background: rgba(200,41,74,0.06);
+      border: 1px solid rgba(200,41,74,0.18);
+      border-left: 4px solid var(--crimson);
+      border-radius: 0 12px 12px 0;
+      padding: 28px 32px; margin: 48px 0;
+    }
+    .relevance-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--crimson);
+      margin-bottom: 12px;
+    }
+    .relevance h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--cream); margin-bottom: 12px;
+    }
+    .relevance p {
+      font-size: 15px; color: var(--cream-dim);
+      line-height: 1.8; margin-bottom: 10px;
+    }
+    .relevance p:last-child { margin-bottom: 0; }
+    .relevance p strong { color: var(--cream); }
+
+    /* ── CTA ── */
+    .cta-box {
+      background: var(--cream-faint);
+      border: 1px solid rgba(201,150,58,0.15);
+      border-top: 3px solid var(--crimson);
+      border-radius: 12px; padding: 40px 32px;
+      text-align: center; margin-top: 56px;
+    }
+    .cta-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 700;
+      color: var(--cream); margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .cta-box h3 em { color: var(--crimson); font-style: italic; }
+    .cta-box p {
+      font-size: 15px; color: var(--cream-dim);
+      max-width: 460px; margin: 0 auto 28px; line-height: 1.8;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--crimson); color: var(--cream);
+      text-decoration: none; padding: 15px 36px;
+      border-radius: 8px; font-size: 15px; font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .cta-note {
+      display: block; font-size: 12px;
+      color: rgba(245,237,224,0.25); margin-top: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 24px;
+      border-top: 1px solid rgba(245,237,224,0.06);
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: rgba(245,237,224,0.2); }
+    footer a { color: rgba(201,150,58,0.4); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .hero { padding: 100px 20px 56px; }
+      .article-wrap { padding: 48px 20px 56px; }
+      .relevance, .cta-box { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">English <em>Like a Native</em></a>
+    <a class="nav-cta" href="https://english-club-866-trial.systeme.io/order">Попробовать за $5</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-source">📰 &nbsp; New York Times · July 15, 1997</div>
+      <h1 class="hero-h1">Когда взрослый добавляет язык —<br><em>один мозг, две системы</em></h1>
+      <div class="hero-byline">
+        <strong>Sandra Blakeslee</strong> · The New York Times<br>
+        Основано на исследовании в журнале <strong>Nature</strong>, 1997
+      </div>
+      <div class="hero-key">
+        Люди, выучившие второй язык во взрослом возрасте,<br>используют отдельную область мозга для каждого языка.
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="showLang('en')">English</button>
+        <button class="lang-btn" onclick="showLang('ru')">Русский</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <div class="article-wrap">
+
+    <!-- ENGLISH VERSION -->
+    <div class="article-en visible" id="article-en">
+
+      <div class="science-box">
+        <div class="science-box-label">Key Finding</div>
+        <p><strong>Babies who learn two languages simultaneously have a single brain region for generating complex speech.</strong> But people who learn a second language in adolescence or adulthood possess two such brain regions — one for each language.</p>
+      </div>
+
+      <p class="article-p">As thousands of teen-agers who have struggled to engrave high school French on recalcitrant neurons might have guessed, a new study has found that second languages are stored differently in the human brain depending on when they are learned.</p>
+
+      <p class="article-p">The findings, described in the current issue of the journal <strong>Nature</strong>, shed new light on some notoriously difficult questions about brain development: How does the brain organize language in infancy and how are multiple languages represented in the brain? Why are languages harder to learn later in life?</p>
+
+      <div class="article-pull">
+        "Language is a high-rent district." — Dr. Philip H. Gutin, Chief of Neurosurgery, Memorial Sloan-Kettering Hospital
+      </div>
+
+      <p class="article-p">The research was carried out by Dr. Joy Hirsch, head of Memorial Sloan-Kettering Hospital's functional M.R.I. Laboratory. To explore where languages lie in the brain, Dr. Hirsch recruited 12 healthy bilingual people from New York City. Ten different languages were represented in the group. Half had learned two languages in infancy. The other half began learning a second language around age 11 and had acquired fluency by 19.</p>
+
+      <div class="article-divider"><span>✦</span></div>
+
+      <p class="article-p">With their heads inside the M.R.I. machine, subjects thought silently about what they had done the day before using complex sentences, first in one language, then in the other. The machine detected increases in blood flow, indicating where in the brain this thinking took place.</p>
+
+      <p class="article-p"><strong>None of the 12 bilinguals had two separate Wernicke's areas.</strong> In an English and Spanish speaker, for instance, Spanish semantics blended with English semantics in the same area. But there were dramatic differences in Broca's areas.</p>
+
+      <p class="article-p">In people who had learned both languages in infancy, there was only one uniform Broca's region for both languages — a dot of tissue containing about 30,000 neurons. Among those who had learned a second language in adolescence, however, <strong>Broca's area seemed to be divided into two distinct areas.</strong> Only one area was activated for each language.</p>
+
+      <div class="article-divider"><span>✦</span></div>
+
+      <p class="article-p">This implies that the brain uses different strategies for learning languages, depending on age. A baby learns to talk using all faculties — hearing, vision, touch and movement — which may feed into hardwired circuits like Broca's area. <strong>Once cells in this region become tuned to one or more languages, they become fixed.</strong></p>
+
+      <p class="article-p">But people who learn a second language in high school have to acquire new skills for generating the complex speech sounds of the new tongue, which may explain why a second language is harder to learn. Broca's area is already dedicated to the native tongue and so an ancillary Broca's region is created.</p>
+
+    </div>
+
+    <!-- RUSSIAN VERSION -->
+    <div class="article-ru" id="article-ru">
+
+      <div class="science-box">
+        <div class="science-box-label">Ключевой вывод</div>
+        <p><strong>Дети, которые изучают два языка одновременно, имеют единую область мозга для генерации сложной речи.</strong> Но люди, изучающие второй язык в подростковом или зрелом возрасте, обладают двумя такими областями — по одной для каждого языка.</p>
+      </div>
+
+      <p class="article-p">Как могли догадаться тысячи подростков, которые изо всех сил пытались выучить французский язык в средней школе, новое исследование показало, что вторые языки сохраняются в человеческом мозгу по-разному — в зависимости от того, когда они были изучены.</p>
+
+      <p class="article-p">Выводы, описанные в последнем выпуске журнала <strong>Nature</strong>, проливают новый свет на сложные вопросы развития мозга: как мозг организует речь в младенчестве? Как в мозгу представлены несколько языков? Почему языки труднее учить во взрослом возрасте?</p>
+
+      <div class="article-pull">
+        «Язык — это район с высокой арендой.» — Доктор Филип Гутин, заведующий нейрохирургией, больница Мемориал Слоун-Кеттеринг
+      </div>
+
+      <p class="article-p">Исследование было проведено доктором Джой Хирш из функциональной МРТ-лаборатории. Для изучения расположения языков в мозгу были набраны 12 здоровых двуязычных людей из Нью-Йорка. В группе были представлены десять разных языков. Половина выучила два языка в младенчестве. Другая половина начала изучать второй язык около 11 лет и свободно говорила к 19 годам.</p>
+
+      <div class="article-divider"><span>✦</span></div>
+
+      <p class="article-p">Испытуемые молча думали о том, что делали накануне, используя сложные предложения — сначала на одном языке, затем на другом. МРТ-машина обнаружила увеличение кровотока, указав, в каком месте мозга происходило это мышление.</p>
+
+      <p class="article-p"><strong>Ни у одного из 12 билингвов не было двух отдельных областей Вернике.</strong> У человека, говорящего по-английски и по-испански, испанская семантика смешивалась с английской в одной и той же области. Но в зонах Брока были существенные различия.</p>
+
+      <p class="article-p">У людей, выучивших оба языка в младенчестве, была только одна область Брока для обоих языков — точка ткани, содержащая около 30 000 нейронов. Среди тех, кто выучил второй язык в подростковом возрасте, <strong>область Брока была разделена на две отдельные области.</strong> Для каждого языка активировалась только одна.</p>
+
+      <div class="article-divider"><span>✦</span></div>
+
+      <p class="article-p">Это означает, что мозг использует разные стратегии для изучения языков в зависимости от возраста. Младенец учится говорить, используя все способности — слух, зрение, осязание и движение, — которые питают встроенные цепи, такие как зона Брока. <strong>Как только клетки в этой области настраиваются на один или несколько языков, они фиксируются.</strong></p>
+
+      <p class="article-p">Но люди, изучающие второй язык в старшей школе, должны приобрести новые навыки для воспроизведения сложных звуков нового языка — что объясняет, почему второй язык труднее выучить. Область Брока уже посвящена родному языку, поэтому создаётся вспомогательная область Брока.</p>
+
+    </div>
+
+    <!-- RELEVANCE BOX -->
+    <div class="relevance">
+      <div class="relevance-label">Почему это важно для тебя</div>
+      <h3>Вот научное объяснение метода</h3>
+      <p>Эта статья объясняет именно то, на чём построен курс <strong>English Like a Native</strong>. Если ты учишь английский во взрослом возрасте — твой мозг строит <strong>отдельный языковой центр</strong>. Задача метода — помочь этому центру сформироваться правильно.</p>
+      <p>Не через перевод, не через правила — а через погружение, образы и синхронное повторение. <strong>Именно так мозг строит второй языковой центр быстрее и прочнее.</strong></p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <h3>Почувствуй метод —<br><em>первый урок за $5</em></h3>
+      <p>Один урок. Никаких обязательств. Если метод не для тебя — ты узнаешь это за $5, а не за $500.</p>
+      <a class="btn-primary" href="https://english-club-866-trial.systeme.io/order">Попробовать за $5 →</a>
+      <span class="cta-note">Мгновенный доступ · Безопасная оплата через Stripe</span>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      English Like a Native · Uncle Nexus LLC<br>
+      <a href="mailto:alex@alexmentorusa.com">alex@alexmentorusa.com</a> ·
+      <a href="https://t.me/ALEX_MENTOR_USA" target="_blank">@ALEX_MENTOR_USA</a> ·
+      <a href="index.html">Все варианты курса</a>
+    </p>
+  </footer>
+
+  <script>
+    function showLang(lang) {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.article-en, .article-ru').forEach(a => a.classList.remove('visible'));
+      document.getElementById('article-' + lang).classList.add('visible');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
