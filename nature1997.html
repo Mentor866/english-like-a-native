@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distinct Cortical Areas — Native & Second Languages · Nature 1997</title>
+  <meta name="description" content="Original fMRI research from Nature journal (1997): second languages learned in adulthood activate separate brain regions from native languages. Kim, Relkin, Lee & Hirsch.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1a1008;
+      --gold: #c9963a;
+      --gold-light: #e8b95a;
+      --crimson: #c8294a;
+      --cream: #f5ede0;
+      --cream-dim: rgba(245,237,224,0.6);
+      --cream-faint: rgba(245,237,224,0.05);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(26,16,8,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,150,58,0.12);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 700; color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-logo em { color: var(--crimson); font-style: italic; }
+    .nav-cta {
+      background: var(--crimson); color: var(--cream);
+      text-decoration: none; padding: 8px 20px;
+      border-radius: 6px; font-size: 13px; font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 24px 72px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201,150,58,0.12);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,150,58,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 740px; margin: 0 auto; position: relative; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,150,58,0.08);
+      border: 1px solid rgba(201,150,58,0.2);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: 12px; color: var(--gold);
+      font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--cream); margin-bottom: 16px;
+    }
+    .hero-h1 em { color: var(--gold-light); font-style: italic; }
+    .hero-authors {
+      font-size: 14px; color: rgba(245,237,224,0.45);
+      margin-bottom: 32px; line-height: 1.8;
+    }
+    .hero-authors strong { color: rgba(245,237,224,0.7); }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 700;
+      color: var(--gold-light); line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px; color: rgba(245,237,224,0.35);
+      letter-spacing: 1px; margin-top: 4px;
+    }
+
+    /* ── LAYOUT ── */
+    .article-wrap {
+      max-width: 760px; margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700; color: var(--cream);
+      line-height: 1.2; margin-bottom: 24px;
+    }
+    .section-h2 em { color: var(--gold-light); font-style: italic; }
+    .section-h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--cream); margin-bottom: 10px;
+    }
+
+    /* ── TEXT ── */
+    .article-p {
+      font-size: 15px; color: var(--cream-dim);
+      line-height: 1.95; margin-bottom: 18px;
+    }
+    .article-p:last-child { margin-bottom: 0; }
+    .article-p strong { color: var(--cream); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      background: rgba(201,150,58,0.06);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 28px; margin: 32px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic;
+      color: var(--gold-light); line-height: 1.7;
+    }
+    .pull-quote cite {
+      display: block; font-size: 12px;
+      color: rgba(245,237,224,0.35);
+      font-style: normal; margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── SECTION BLOCK ── */
+    .section-block {
+      margin-bottom: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(245,237,224,0.06);
+    }
+    .section-block:last-child { border-bottom: none; }
+
+    /* ── ANATOMY CARDS ── */
+    .anatomy-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-bottom: 24px;
+    }
+    .anatomy-card {
+      background: var(--cream-faint);
+      border: 1px solid rgba(245,237,224,0.08);
+      border-top: 3px solid var(--gold);
+      border-radius: 12px; padding: 24px 20px;
+    }
+    .anatomy-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--cream); margin-bottom: 6px;
+    }
+    .anatomy-card-location {
+      font-size: 11px; color: var(--gold);
+      font-weight: 700; letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .anatomy-card-text {
+      font-size: 14px; color: var(--cream-dim); line-height: 1.75;
+    }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; margin: 24px 0; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr {
+      background: rgba(201,150,58,0.1);
+      border-bottom: 1px solid rgba(201,150,58,0.2);
+    }
+    th {
+      padding: 10px 14px; text-align: left;
+      color: var(--gold); font-weight: 700;
+      font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 9px 14px;
+      color: var(--cream-dim);
+      border-bottom: 1px solid rgba(245,237,224,0.05);
+    }
+    tr:hover td { background: rgba(245,237,224,0.02); }
+    .table-section-header td {
+      background: rgba(200,41,74,0.07);
+      color: var(--crimson);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 8px 14px;
+    }
+
+    /* ── FINDINGS CARDS ── */
+    .findings-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-bottom: 28px;
+    }
+    .finding-card {
+      background: var(--cream-faint);
+      border: 1px solid rgba(245,237,224,0.07);
+      border-radius: 12px; padding: 24px 20px;
+    }
+    .finding-card-icon { font-size: 24px; margin-bottom: 10px; }
+    .finding-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--cream); margin-bottom: 6px;
+    }
+    .finding-card-sub {
+      font-size: 11px; color: var(--gold);
+      font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .finding-list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .finding-list li {
+      font-size: 13px; color: var(--cream-dim);
+      padding: 5px 0 5px 18px; position: relative;
+      line-height: 1.6;
+      border-bottom: 1px solid rgba(245,237,224,0.05);
+    }
+    .finding-list li:last-child { border-bottom: none; }
+    .finding-list li::before {
+      content: '✦'; position: absolute; left: 0;
+      color: var(--gold); font-size: 8px; top: 8px;
+    }
+    .finding-list li strong { color: var(--cream); }
+
+    /* ── STAT BOX ── */
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 16px; margin: 24px 0;
+    }
+    .stat-box {
+      background: rgba(201,150,58,0.07);
+      border: 1px solid rgba(201,150,58,0.15);
+      border-radius: 10px; padding: 20px 16px;
+      text-align: center;
+    }
+    .stat-box-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--gold-light); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-box-label {
+      font-size: 11px; color: rgba(245,237,224,0.4);
+      line-height: 1.5;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex; align-items: center;
+      gap: 16px; margin: 36px 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(245,237,224,0.07);
+    }
+    .divider span { font-size: 16px; color: rgba(201,150,58,0.35); }
+
+    /* ── RELEVANCE ── */
+    .relevance {
+      background: rgba(200,41,74,0.06);
+      border: 1px solid rgba(200,41,74,0.18);
+      border-left: 4px solid var(--crimson);
+      border-radius: 0 12px 12px 0;
+      padding: 28px 32px; margin: 48px 0;
+    }
+    .relevance-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--crimson); margin-bottom: 10px;
+    }
+    .relevance h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--cream); margin-bottom: 12px;
+    }
+    .relevance p {
+      font-size: 15px; color: var(--cream-dim);
+      line-height: 1.85; margin-bottom: 10px;
+    }
+    .relevance p:last-child { margin-bottom: 0; }
+    .relevance p strong { color: var(--cream); }
+
+    /* ── CTA ── */
+    .cta-box {
+      background: var(--cream-faint);
+      border: 1px solid rgba(201,150,58,0.15);
+      border-top: 3px solid var(--crimson);
+      border-radius: 12px; padding: 40px 32px;
+      text-align: center; margin-top: 56px;
+    }
+    .cta-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 700;
+      color: var(--cream); margin-bottom: 12px; line-height: 1.2;
+    }
+    .cta-box h3 em { color: var(--crimson); font-style: italic; }
+    .cta-box p {
+      font-size: 15px; color: var(--cream-dim);
+      max-width: 460px; margin: 0 auto 28px; line-height: 1.85;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--crimson); color: var(--cream);
+      text-decoration: none; padding: 15px 36px;
+      border-radius: 8px; font-size: 15px; font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .cta-note {
+      display: block; font-size: 12px;
+      color: rgba(245,237,224,0.25); margin-top: 12px;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-top: 32px;
+    }
+    .lang-btn {
+      padding: 8px 20px; border-radius: 6px;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+      border: 1px solid rgba(201,150,58,0.3);
+      background: transparent; color: rgba(245,237,224,0.4);
+      font-family: 'Nunito', sans-serif;
+    }
+    .lang-btn.active {
+      background: rgba(201,150,58,0.15);
+      color: var(--gold-light);
+      border-color: rgba(201,150,58,0.5);
+    }
+    .lang-btn:hover:not(.active) { color: rgba(245,237,224,0.7); }
+    .article-en, .article-ru { display: none; }
+    .article-en.visible, .article-ru.visible { display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 24px;
+      border-top: 1px solid rgba(245,237,224,0.06);
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: rgba(245,237,224,0.2); line-height: 1.8; }
+    footer a { color: rgba(201,150,58,0.4); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .hero { padding: 100px 20px 56px; }
+      .hero-stats { gap: 20px; }
+      .anatomy-grid { grid-template-columns: 1fr; }
+      .findings-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .article-wrap { padding: 48px 20px 56px; }
+      .relevance, .cta-box { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">English <em>Like a Native</em></a>
+    <a class="nav-cta" href="https://english-club-866-trial.systeme.io/order">Try for $5</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🔬 &nbsp; Nature · Vol 388 · July 10, 1997</div>
+      <h1 class="hero-h1">Distinct Cortical Areas Associated with<br><em>Native and Second Languages</em></h1>
+      <div class="hero-authors">
+        <strong>Karl H. S. Kim · Norman R. Relkin · Kyoung-Min Lee · Joy Hirsch</strong><br>
+        Memorial Sloan-Kettering Cancer Center & Cornell University Medical College, New York
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">12</div>
+          <div class="hero-stat-label">Bilingual Subjects</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">10</div>
+          <div class="hero-stat-label">Languages Represented</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">1.5T</div>
+          <div class="hero-stat-label">fMRI Field Strength</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">1997</div>
+          <div class="hero-stat-label">Published in Nature</div>
+        </div>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="showLang('en')">English</button>
+        <button class="lang-btn" onclick="showLang('ru')">Русский</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <div class="article-wrap">
+    <div class="article-en visible" id="article-en">
+
+    <!-- ABSTRACT -->
+    <div class="section-block">
+      <div class="section-eyebrow">Abstract</div>
+      <h2 class="section-h2">The Question: How Does One Brain Hold <em>Two Languages?</em></h2>
+      <p class="article-p">The ability to acquire and use several languages selectively is a unique and essential human capacity. Using functional magnetic resonance imaging (fMRI), the authors investigated how multiple languages are represented in the human cortex — and discovered that <strong>second languages acquired in adulthood are spatially separated from native languages in Broca's area</strong>, while languages learned simultaneously in early childhood share common frontal cortical areas.</p>
+
+      <div class="pull-quote">
+        "Second languages acquired in adulthood occupy a distinct and separate region of Broca's area — adjacent to, but never overlapping with, the native language."
+        <cite>— Kim, Relkin, Lee & Hirsch · Nature (1997)</cite>
+      </div>
+    </div>
+
+    <!-- BACKGROUND -->
+    <div class="section-block">
+      <div class="section-eyebrow">Background</div>
+      <h2 class="section-h2">What We Already Knew — <em>and What Was Missing</em></h2>
+      <p class="article-p">Indirect evidence for topographic specialization within the language-dominant hemisphere of multilingual subjects had long existed. Bilingual epilepsy patients occasionally lose the ability to speak one language while retaining another during seizures. Stroke victims can permanently lose one language while preserving a second. Electrical stimulation of discrete neocortical regions can selectively disrupt individual languages in polyglots.</p>
+      <p class="article-p"><strong>Yet the precise spatial relationship between different languages in the living brain had never been directly localized — until this study.</strong></p>
+    </div>
+
+    <!-- ANATOMY -->
+    <div class="section-block">
+      <div class="section-eyebrow">Anatomy</div>
+      <h2 class="section-h2">The Two Language Regions <em>Under Study</em></h2>
+      <div class="anatomy-grid">
+        <div class="anatomy-card">
+          <div class="anatomy-card-name">Broca's Area</div>
+          <div class="anatomy-card-location">Inferior Frontal Gyrus · Brodmann 44 & 46</div>
+          <div class="anatomy-card-text">Responsible for the execution of speech and deep grammatical processing. This is the <em>anterior</em> language region — and the site of the study's most dramatic finding. <strong>Critical for producing language.</strong></div>
+        </div>
+        <div class="anatomy-card">
+          <div class="anatomy-card-name">Wernicke's Area</div>
+          <div class="anatomy-card-location">Posterior Superior Temporal Gyrus · Brodmann 22</div>
+          <div class="anatomy-card-text">Responsible for understanding the meaning of words and the semantics of language. This <em>posterior</em> region showed <strong>little separation between languages</strong> regardless of acquisition age.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div class="section-block">
+      <div class="section-eyebrow">Methodology</div>
+      <h2 class="section-h2">How the Study <em>Was Conducted</em></h2>
+      <p class="article-p">A 1.5-tesla MRI scanner with echo-planar imaging was used to acquire T2*-weighted images sensitive to changes in deoxyhaemoglobin levels accompanying neuronal activation. Sixteen contiguous brain slices covered both language regions.</p>
+      <p class="article-p">Subjects performed a <strong>silent sentence-generation task</strong>: they were asked to mentally describe events from the previous day using complex sentences — first in one language, then the other. Graphical cues were displayed in unpredictable order to prevent mental rehearsal. Two identical runs were performed per language.</p>
+      <p class="article-p">Statistical analysis used a multistage coincidence method with an empirically determined false-positive rate of <strong>p ≤ 0.0005</strong>. The centroid of each language's activation cluster was calculated as its two-dimensional centre of mass.</p>
+
+      <div class="divider"><span>✦</span></div>
+
+      <div class="section-eyebrow">Participants</div>
+      <h2 class="section-h2">Subject <em>Information</em></h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Age</th>
+              <th>Native Language(s)</th>
+              <th>Second Language</th>
+              <th>Hand</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-section-header">
+              <td colspan="5">Late Bilinguals — second language acquired in early adulthood</td>
+            </tr>
+            <tr><td>A</td><td>31</td><td>English</td><td>French</td><td>Right</td></tr>
+            <tr><td>B</td><td>32</td><td>Korean</td><td>English</td><td>Right</td></tr>
+            <tr><td>C</td><td>28</td><td>Korean</td><td>English</td><td>Right</td></tr>
+            <tr><td>D</td><td>26</td><td>English</td><td>Japanese</td><td>Ambidextrous</td></tr>
+            <tr><td>E</td><td>27</td><td>Spanish</td><td>English</td><td>Right</td></tr>
+            <tr><td>F</td><td>32</td><td>German</td><td>English</td><td>Right</td></tr>
+            <tr class="table-section-header">
+              <td colspan="5">Early Bilinguals — two languages acquired simultaneously in infancy</td>
+            </tr>
+            <tr><td>G</td><td>38</td><td>Turkish / English</td><td>—</td><td>Ambidextrous</td></tr>
+            <tr><td>H</td><td>27</td><td>English / Hebrew</td><td>—</td><td>Right</td></tr>
+            <tr><td>I</td><td>23</td><td>English / Spanish</td><td>—</td><td>Right</td></tr>
+            <tr><td>J</td><td>24</td><td>Croatian / English</td><td>—</td><td>Right</td></tr>
+            <tr><td>K</td><td>31</td><td>Italian / German</td><td>—</td><td>Right</td></tr>
+            <tr><td>L</td><td>32</td><td>Chinese / English</td><td>—</td><td>Ambidextrous</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="article-p" style="font-size:13px; color:rgba(245,237,224,0.35);">Mean age: 29.3 ± 4.2 years. Late bilinguals acquired their second language at mean age 11.2 years and reached fluency by 19.2 years.</p>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="section-block">
+      <div class="section-eyebrow">Results</div>
+      <h2 class="section-h2">Key <em>Findings</em></h2>
+
+      <div class="findings-grid">
+        <div class="finding-card">
+          <div class="finding-card-icon">🧠</div>
+          <div class="finding-card-title">Late Bilinguals</div>
+          <div class="finding-card-sub">Second language learned in adulthood</div>
+          <ul class="finding-list">
+            <li>Two <strong>distinct</strong> Broca's areas — one per language</li>
+            <li>Separation: <strong>4.5–11.2 mm</strong></li>
+            <li>Mean separation: <strong>6.43 ± 1.83 mm</strong></li>
+            <li><strong>Zero shared voxels</strong> between language zones</li>
+            <li>Wernicke's area: only 1.1–3.3 mm apart</li>
+          </ul>
+        </div>
+        <div class="finding-card">
+          <div class="finding-card-icon">🧠</div>
+          <div class="finding-card-title">Early Bilinguals</div>
+          <div class="finding-card-sub">Two languages acquired in infancy</div>
+          <ul class="finding-list">
+            <li>Languages <strong>intermingled</strong> in a single Broca's region</li>
+            <li>Mean separation: only <strong>1.53 ± 0.78 mm</strong></li>
+            <li><strong>20–62% of voxels common</strong> to both languages</li>
+            <li>Wernicke's area: mean separation 1.58 mm</li>
+            <li>Effectively <strong>no language segregation</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-box-num">6.43mm</div>
+          <div class="stat-box-label">Mean Broca's separation in late bilinguals</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">1.53mm</div>
+          <div class="stat-box-label">Mean Broca's separation in early bilinguals</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">p≤0.000059</div>
+          <div class="stat-box-label">Statistical significance (ANOVA)</div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        "The separation in Broca's area is specific to late acquisition — Wernicke's area shows minimal separation regardless of acquisition age."
+        <cite>— ANOVA results, Kim et al. (1997)</cite>
+      </div>
+    </div>
+
+    <!-- INTERPRETATION -->
+    <div class="section-block">
+      <div class="section-eyebrow">Interpretation</div>
+      <h2 class="section-h2">What Does <em>This Mean?</em></h2>
+      <p class="article-p">The observation that languages in Broca's area are spatially separated only when the second language was learned late in life suggests that <strong>the age of acquisition is a critical factor</strong> in the functional organization of this region.</p>
+      <p class="article-p">Human infants are initially capable of discriminating all phonetically relevant differences across languages — but gradually narrow their perceptual acoustic space through repeated early exposure. It is possible that <strong>representations of languages in Broca's area, once established through early-life exposure, are not subsequently modified.</strong></p>
+      <p class="article-p">This would force the brain to recruit <em>adjacent</em> cortical tissue for a second language learned as an adult — explaining both the spatial separation seen in late bilinguals and the well-documented difficulty of adult language acquisition.</p>
+      <p class="article-p">Wernicke's area — responsible for semantic meaning — appears to remain flexible throughout life, allowing later-learned languages to share the same semantic processing substrate. <strong>The critical divide is in phonetic and grammatical execution, not in conceptual meaning.</strong></p>
+    </div>
+
+    <!-- RELEVANCE -->
+    <div class="relevance">
+      <div class="relevance-label">Why This Matters for You</div>
+      <h3>This Is the Science Behind the Method</h3>
+      <p>This research explains exactly why <strong>English Like a Native</strong> works the way it does. When you learn English as an adult, your brain builds a <strong>separate language center</strong> in Broca's area — adjacent to your native language, but distinct from it.</p>
+      <p>The method's goal is to help that second language center form as efficiently as possible. <strong>Not through translation, not through grammar rules</strong> — but through immersion, imagery, and synchronous repetition. The same way you built your native language as a child.</p>
+      <p>Wernicke's area stays flexible — which means you can absorb new vocabulary and meaning at any age. The challenge is Broca's area — the execution of speech. That's exactly what the four practice blocks in every lesson are designed to train.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <h3>Experience the method —<br><em>first lesson for $5</em></h3>
+      <p>One lesson. No commitment. If the method isn't for you — you'll know after $5, not $500.</p>
+      <a class="btn-primary" href="https://english-club-866-trial.systeme.io/order">Try for $5 →</a>
+      <span class="cta-note">Instant access · Secure payment via Stripe</span>
+    </div>
+
+    </div><!-- /article-en -->
+
+    <!-- RUSSIAN VERSION -->
+    <div class="article-ru" id="article-ru">
+
+      <div class="section-block">
+        <div class="section-eyebrow">Аннотация</div>
+        <h2 class="section-h2">Вопрос: как один мозг хранит <em>два языка?</em></h2>
+        <p class="article-p">Способность усваивать и избирательно использовать несколько языков — уникальное и существенное свойство человека. С помощью функциональной МРТ авторы исследовали, как несколько языков представлены в коре головного мозга, и обнаружили, что <strong>второй язык, усвоенный во взрослом возрасте, пространственно отделён от родного в зоне Брока</strong>, тогда как языки, усвоенные одновременно в раннем детстве, занимают общие области лобной коры.</p>
+        <div class="pull-quote">
+          «Второй язык, усвоенный во взрослом возрасте, занимает отдельную область зоны Брока — смежную с родным языком, но никогда с ним не пересекающуюся.»
+          <cite>— Ким, Релкин, Ли и Хирш · Nature (1997)</cite>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">Предпосылки</div>
+        <h2 class="section-h2">Что было известно — <em>и чего не хватало</em></h2>
+        <p class="article-p">Косвенные свидетельства топографической специализации в языково-доминантном полушарии у многоязычных людей существовали давно. Билингвальные больные эпилепсией иногда теряли способность говорить на одном языке, сохраняя другой во время приступов. Жертвы инсульта могли навсегда утратить один язык, сохранив второй. Электрическая стимуляция отдельных областей неокортекса могла избирательно нарушать отдельные языки у полиглотов.</p>
+        <p class="article-p"><strong>Однако точное пространственное соотношение между разными языками в живом мозге никогда не было локализовано напрямую — до этого исследования.</strong></p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">Анатомия</div>
+        <h2 class="section-h2">Две языковые области <em>под изучением</em></h2>
+        <div class="anatomy-grid">
+          <div class="anatomy-card">
+            <div class="anatomy-card-name">Зона Брока</div>
+            <div class="anatomy-card-location">Нижняя лобная извилина · Поля Бродмана 44 и 46</div>
+            <div class="anatomy-card-text">Отвечает за исполнение речи и глубокую грамматическую обработку. Это <em>передняя</em> языковая область — и место наиболее драматической находки исследования. <strong>Критически важна для производства речи.</strong></div>
+          </div>
+          <div class="anatomy-card">
+            <div class="anatomy-card-name">Зона Вернике</div>
+            <div class="anatomy-card-location">Задняя верхняя височная извилина · Поле Бродмана 22</div>
+            <div class="anatomy-card-text">Отвечает за понимание значения слов и семантику языка. Эта <em>задняя</em> область показала <strong>минимальное разделение между языками</strong> независимо от возраста усвоения.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">Методология</div>
+        <h2 class="section-h2">Как проводилось <em>исследование</em></h2>
+        <p class="article-p">Использовался 1,5-тесловый МРТ-сканер с эхо-планарной визуализацией, чувствительный к изменениям уровня дезоксигемоглобина при нейронной активации. Шестнадцать смежных срезов мозга охватывали обе языковые области.</p>
+        <p class="article-p">Испытуемые выполняли <strong>задание на молчаливую генерацию предложений</strong>: они мысленно описывали события предыдущего дня — сначала на одном языке, затем на другом. Статистический анализ использовал многоэтапный метод совпадений с долей ложных срабатываний <strong>p ≤ 0,0005</strong>.</p>
+        <div class="divider"><span>✦</span></div>
+        <div class="section-eyebrow">Участники</div>
+        <h2 class="section-h2">Сведения об <em>участниках</em></h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Участник</th><th>Возраст</th><th>Родной язык</th><th>Второй язык</th><th>Рука</th></tr>
+            </thead>
+            <tbody>
+              <tr class="table-section-header"><td colspan="5">Поздние билингвы — второй язык усвоен во взрослом возрасте</td></tr>
+              <tr><td>A</td><td>31</td><td>Английский</td><td>Французский</td><td>Правая</td></tr>
+              <tr><td>B</td><td>32</td><td>Корейский</td><td>Английский</td><td>Правая</td></tr>
+              <tr><td>C</td><td>28</td><td>Корейский</td><td>Английский</td><td>Правая</td></tr>
+              <tr><td>D</td><td>26</td><td>Английский</td><td>Японский</td><td>Обе</td></tr>
+              <tr><td>E</td><td>27</td><td>Испанский</td><td>Английский</td><td>Правая</td></tr>
+              <tr><td>F</td><td>32</td><td>Немецкий</td><td>Английский</td><td>Правая</td></tr>
+              <tr class="table-section-header"><td colspan="5">Ранние билингвы — два языка усвоены одновременно в младенчестве</td></tr>
+              <tr><td>G</td><td>38</td><td>Турецкий / Английский</td><td>—</td><td>Обе</td></tr>
+              <tr><td>H</td><td>27</td><td>Английский / Иврит</td><td>—</td><td>Правая</td></tr>
+              <tr><td>I</td><td>23</td><td>Английский / Испанский</td><td>—</td><td>Правая</td></tr>
+              <tr><td>J</td><td>24</td><td>Хорватский / Английский</td><td>—</td><td>Правая</td></tr>
+              <tr><td>K</td><td>31</td><td>Итальянский / Немецкий</td><td>—</td><td>Правая</td></tr>
+              <tr><td>L</td><td>32</td><td>Китайский / Английский</td><td>—</td><td>Обе</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="article-p" style="font-size:13px; color:rgba(245,237,224,0.35);">Средний возраст: 29,3 ± 4,2 года. Поздние билингвы начали изучать второй язык в среднем в 11,2 года и достигли беглости к 19,2 годам.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">Результаты</div>
+        <h2 class="section-h2">Ключевые <em>находки</em></h2>
+        <div class="findings-grid">
+          <div class="finding-card">
+            <div class="finding-card-icon">🧠</div>
+            <div class="finding-card-title">Поздние билингвы</div>
+            <div class="finding-card-sub">Второй язык усвоен во взрослом возрасте</div>
+            <ul class="finding-list">
+              <li>Две <strong>отдельные</strong> зоны Брока — по одной на язык</li>
+              <li>Расстояние: <strong>4,5–11,2 мм</strong></li>
+              <li>Среднее: <strong>6,43 ± 1,83 мм</strong></li>
+              <li><strong>Ноль общих вокселей</strong> между языковыми зонами</li>
+              <li>Зона Вернике: всего 1,1–3,3 мм между центроидами</li>
+            </ul>
+          </div>
+          <div class="finding-card">
+            <div class="finding-card-icon">🧠</div>
+            <div class="finding-card-title">Ранние билингвы</div>
+            <div class="finding-card-sub">Два языка усвоены в младенчестве</div>
+            <ul class="finding-list">
+              <li>Языки <strong>перемешаны</strong> в единой зоне Брока</li>
+              <li>Среднее расстояние: <strong>1,53 ± 0,78 мм</strong></li>
+              <li><strong>20–62% вокселей общие</strong> для обоих языков</li>
+              <li>Зона Вернике: среднее расстояние 1,58 мм</li>
+              <li>Фактически <strong>нет разделения языков</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-box-num">6,43 мм</div><div class="stat-box-label">Среднее расстояние в зоне Брока у поздних билингвов</div></div>
+          <div class="stat-box"><div class="stat-box-num">1,53 мм</div><div class="stat-box-label">Среднее расстояние в зоне Брока у ранних билингвов</div></div>
+          <div class="stat-box"><div class="stat-box-num">p≤0,000059</div><div class="stat-box-label">Статистическая значимость (ANOVA)</div></div>
+        </div>
+        <div class="pull-quote">
+          «Разделение в зоне Брока специфично для позднего усвоения — зона Вернике демонстрирует минимальное разделение независимо от возраста усвоения.»
+          <cite>— Результаты ANOVA, Ким и др. (1997)</cite>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-eyebrow">Интерпретация</div>
+        <h2 class="section-h2">Что это <em>означает?</em></h2>
+        <p class="article-p">Тот факт, что языки в зоне Брока пространственно разделены только при позднем усвоении, свидетельствует о том, что <strong>возраст усвоения является критическим фактором</strong> в функциональной организации этой области.</p>
+        <p class="article-p">В младенчестве люди способны различать все фонетически значимые различия между языками — но постепенно сужают своё перцептивное пространство. Возможно, что <strong>представления языков в зоне Брока, сформированные в раннем детстве, впоследствии не изменяются.</strong></p>
+        <p class="article-p">Это вынуждает мозг задействовать <em>смежную</em> корковую ткань для второго языка, усвоенного во взрослом возрасте — объясняя трудности взрослого усвоения языка. Зона Вернике остаётся гибкой на протяжении всей жизни. <strong>Критический разрыв — в фонетическом и грамматическом исполнении, а не в концептуальном значении.</strong></p>
+      </div>
+
+      <div class="relevance">
+        <div class="relevance-label">Почему это важно для тебя</div>
+        <h3>Вот научное обоснование метода</h3>
+        <p>Это исследование объясняет именно то, на чём построен курс <strong>English Like a Native</strong>. Когда ты учишь английский во взрослом возрасте, твой мозг строит <strong>отдельный языковой центр</strong> в зоне Брока — смежный с родным языком, но отличный от него.</p>
+        <p>Задача метода — помочь этому центру сформироваться эффективно. <strong>Не через перевод, не через правила</strong> — а через погружение, образы и синхронное повторение. Так же, как ты строил родной язык в детстве.</p>
+        <p>Зона Вернике остаётся гибкой — словарный запас можно усваивать в любом возрасте. Сложность — в зоне Брока. Именно это тренируют четыре блока практики в каждом уроке.</p>
+      </div>
+
+      <div class="cta-box">
+        <h3>Почувствуй метод —<br><em>первый урок за $5</em></h3>
+        <p>Один урок. Никаких обязательств. Если метод не для тебя — ты узнаешь это за $5, а не за $500.</p>
+        <a class="btn-primary" href="https://english-club-866-trial.systeme.io/order">Попробовать за $5 →</a>
+        <span class="cta-note">Мгновенный доступ · Безопасная оплата через Stripe</span>
+      </div>
+
+    </div><!-- /article-ru -->
+
+  </div><!-- /article-wrap -->
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      Kim K.H.S., Relkin N.R., Lee K.-M. & Hirsch J. "Distinct cortical areas associated with native and second languages."
+      <em>Nature</em> Vol 388, pp. 171–174 (10 July 1997). Reproduced for educational reference.<br><br>
+      English Like a Native · Uncle Nexus LLC ·
+      <a href="mailto:alex@alexmentorusa.com">alex@alexmentorusa.com</a> ·
+      <a href="https://t.me/ALEX_MENTOR_USA" target="_blank">@ALEX_MENTOR_USA</a> ·
+      <a href="index.html">View the course</a>
+    </p>
+  </footer>
+
+  <script>
+    function showLang(lang) {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.article-en, .article-ru').forEach(a => a.classList.remove('visible'));
+      document.getElementById('article-' + lang).classList.add('visible');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
