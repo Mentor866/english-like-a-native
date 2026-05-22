@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бесплатный урок — English Like a Native</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0f0a05;
+  --bg2:       #1a1008;
+  --bg3:       #231508;
+  --crimson:   #c0392b;
+  --crimson-l: #e74c3c;
+  --gold:      #d4a017;
+  --gold-l:    #f0c040;
+  --text:      #f0e6d3;
+  --muted:     #a08060;
+  --dim:       #6b5040;
+  --border:    rgba(212,160,23,0.18);
+  --border-b:  rgba(212,160,23,0.45);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 80px 24px 60px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(192,57,43,0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 90%, rgba(212,160,23,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--border-b);
+  padding: 5px 16px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp .7s .1s forwards;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeUp .7s .3s forwards;
+}
+.hero h1 em { font-style: italic; color: var(--gold-l); }
+.hero-sub {
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: fadeUp .7s .5s forwards;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
+.divider span { color: var(--gold); font-size: 9px; }
+
+/* ── WRAP ── */
+.wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+/* ── INSTRUCTIONS ── */
+.instructions { padding: 60px 0 48px; }
+.section-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--crimson);
+  border: 1px solid var(--crimson);
+  padding: 4px 14px;
+  margin-bottom: 32px;
+}
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.step { background: var(--bg2); padding: 28px 22px; text-align: center; }
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  color: var(--crimson);
+  opacity: .25;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.step-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 7px;
+  letter-spacing: .5px;
+}
+.step p { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+
+/* ── AUDIO ── */
+.audio-section { padding: 48px 0 40px; }
+.audio-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.audio-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--crimson);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: center;
+}
+/* Crop the iframe to show only play button + waveform */
+.audio-crop {
+  width: 100%;
+  max-width: 600px;
+  height: 73px;          /* waveform + play button only */
+  overflow: hidden;
+  position: relative;
+}
+.audio-crop iframe {
+  width: 100% !important;
+  min-width: 600px;
+  height: 204px !important;
+  display: block;
+  border: none;
+  border-radius: 1px;
+  margin-top: -70px;     /* hide title + download row */
+  pointer-events: auto;
+}
+
+/* ── TEXT TOGGLE ── */
+.text-section { padding: 40px 0 60px; }
+.toggle-bar { display: flex; gap: 2px; margin-bottom: 28px; }
+.toggle-btn {
+  flex: 1;
+  padding: 13px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+.toggle-btn.active { background: var(--crimson); border-color: var(--crimson); color: #fff; }
+.toggle-btn .flag { font-size: 16px; }
+
+.text-panel { display: none; }
+.text-panel.active { display: block; }
+
+.sentences {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+}
+.sentence-row {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 18px 28px;
+  border-bottom: 1px solid rgba(212,160,23,0.08);
+  transition: background .2s;
+}
+.sentence-row:last-child { border-bottom: none; }
+.sentence-row:hover { background: var(--bg3); }
+.s-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--dim);
+  font-weight: 300;
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.s-text-ru {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.s-text-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 2.8vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+.toggle-hint {
+  text-align: center;
+  font-size: .8rem;
+  color: var(--dim);
+  letter-spacing: .5px;
+  margin-top: 16px;
+}
+
+/* ── CTA ── */
+.cta-section {
+  padding: 72px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(192,57,43,0.13) 0%, transparent 70%);
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--crimson), transparent);
+}
+.cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+.cta-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 20px;
+}
+.cta-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.cta-section h2 em { font-style: italic; color: var(--gold-l); }
+.cta-text { color: var(--muted); font-size: .95rem; max-width: 440px; margin: 0 auto 36px; }
+.btn-cta {
+  display: inline-block;
+  padding: 18px 60px;
+  background: var(--crimson);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .3s;
+}
+.btn-cta:hover {
+  background: var(--crimson-l);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(192,57,43,0.45);
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 28px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--dim);
+  font-size: .78rem;
+  letter-spacing: 1px;
+}
+footer span { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .steps { grid-template-columns: 1fr; }
+  .sentence-row { padding: 14px 18px; }
+  .audio-wrap { padding: 16px 12px; }
+  .audio-crop { height: 72px; }
+  .audio-crop iframe { margin-top: -52px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">English Like a Native &middot; Бесплатный урок</div>
+  <h1>Знакомство.<br><em>Без зубрёжки.</em></h1>
+  <p class="hero-sub">Послушай. Читай. Повторяй вслух одновременно со спикером. Без грамматики. Без перевода. Просто говори.</p>
+</section>
+
+<div class="divider"><span>◆</span></div>
+
+<!-- INSTRUCTIONS -->
+<section class="instructions">
+  <div class="wrap">
+    <div class="section-tag">Как работает урок</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="step-icon">🇷🇺</span>
+        <h3>Читай по-русски</h3>
+        <p>Открой русский текст. Прочитай все предложения — пойми смысл. Не переводи — просто читай.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="step-icon">🇺🇸</span>
+        <h3>Переключи на английский</h3>
+        <p>Открой английский текст. Запусти аудио. Читай и говори вслух — одновременно со спикером.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="step-icon">🔁</span>
+        <h3>Повтори несколько раз</h3>
+        <p>Не один раз — три, пять, десять. Рефлекс строится через повторение, а не через понимание.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span>◆</span></div>
+
+<!-- AUDIO -->
+<section class="audio-section">
+  <div class="wrap">
+    <div class="audio-label">▶ &nbsp;Аудио урока</div>
+    <div class="audio-wrap">
+      <div class="audio-crop">
+        <iframe src="https://audio.com/embed/audio/1865858061061521?theme=image"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXT TOGGLE -->
+<section class="text-section">
+  <div class="wrap">
+    <div class="toggle-bar">
+      <button class="toggle-btn active" id="btn-ru" onclick="switchLang('ru')">
+        <span class="flag">🇷🇺</span> Русский
+      </button>
+      <button class="toggle-btn" id="btn-en" onclick="switchLang('en')">
+        <span class="flag">🇺🇸</span> English
+      </button>
+    </div>
+
+    <!-- RUSSIAN -->
+    <div class="text-panel active" id="panel-ru">
+      <div class="sentences">
+        <div class="sentence-row"><span class="s-num">1</span><span class="s-text-ru">Меня зовут Макс.</span></div>
+        <div class="sentence-row"><span class="s-num">2</span><span class="s-text-ru">Мне сорок четыре года.</span></div>
+        <div class="sentence-row"><span class="s-num">3</span><span class="s-text-ru">Я живу в Чикаго.</span></div>
+        <div class="sentence-row"><span class="s-num">4</span><span class="s-text-ru">Я работаю в строительстве.</span></div>
+        <div class="sentence-row"><span class="s-num">5</span><span class="s-text-ru">У меня есть жена и двое детей.</span></div>
+        <div class="sentence-row"><span class="s-num">6</span><span class="s-text-ru">Я никогда не учил английский.</span></div>
+        <div class="sentence-row"><span class="s-num">7</span><span class="s-text-ru">Я не уверен, что это сработает.</span></div>
+        <div class="sentence-row"><span class="s-num">8</span><span class="s-text-ru">Но я здесь, потому что мне нужно говорить по-английски.</span></div>
+        <div class="sentence-row"><span class="s-num">9</span><span class="s-text-ru">Я учусь. Ещё не дошёл.</span></div>
+        <div class="sentence-row"><span class="s-num">10</span><span class="s-text-ru">Я готов попробовать.</span></div>
+      </div>
+      <p class="toggle-hint">Прочитал? Переключись на английский и запусти аудио →</p>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="text-panel" id="panel-en">
+      <div class="sentences">
+        <div class="sentence-row"><span class="s-num">1</span><span class="s-text-en">My name is Max.</span></div>
+        <div class="sentence-row"><span class="s-num">2</span><span class="s-text-en">I'm forty-four years old.</span></div>
+        <div class="sentence-row"><span class="s-num">3</span><span class="s-text-en">I live in Chicago.</span></div>
+        <div class="sentence-row"><span class="s-num">4</span><span class="s-text-en">I work in construction.</span></div>
+        <div class="sentence-row"><span class="s-num">5</span><span class="s-text-en">I have a wife and two kids.</span></div>
+        <div class="sentence-row"><span class="s-num">6</span><span class="s-text-en">I never studied English.</span></div>
+        <div class="sentence-row"><span class="s-num">7</span><span class="s-text-en">I'm not sure this will work.</span></div>
+        <div class="sentence-row"><span class="s-num">8</span><span class="s-text-en">But I'm here because I need to speak English.</span></div>
+        <div class="sentence-row"><span class="s-num">9</span><span class="s-text-en">I'm learning. Not there yet.</span></div>
+        <div class="sentence-row"><span class="s-num">10</span><span class="s-text-en">I give it a try.</span></div>
+      </div>
+      <p class="toggle-hint">Читай вслух вместе со спикером. Повтори аудио 3–5 раз.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><span>◆</span></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-tag">Что дальше</div>
+    <h2>Готов говорить<br><em>по-настоящему?</em></h2>
+    <p class="cta-text">Это был один урок. В полном курсе — живые образы, нарастающая сложность и один принцип: ты говоришь, не думая. С первого дня.</p>
+    <a href="https://mentor866.github.io/english-like-a-native/" class="btn-cta">Войти в курс →</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>English Like a Native</span> &middot; Immersion Method</p>
+</footer>
+
+<script>
+function switchLang(lang) {
+  document.getElementById('panel-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('panel-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+</script>
+</body>
+</html>
